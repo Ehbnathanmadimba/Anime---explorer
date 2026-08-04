@@ -39,3 +39,21 @@ export const getTopAnime = async () => {
     return [];
   }
 };
+
+export const searchAnime = async (zoekterm) => {
+  const url = buildUrl(ENDPOINTS.SEARCH, `q=${encodeURIComponent(zoekterm)}`);
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP fout ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error(`Zoeken naar "${zoekterm}" mislukt:`, error);
+    return [];
+  }
+};
