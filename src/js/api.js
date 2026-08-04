@@ -16,3 +16,8 @@ export const DEFAULTS = {
 
 // Jikan normaal da geeft ongv ~3 requests per seconde toe..
 export const RATE_LIMIT_MS = 400;
+
+export const buildUrl = (endpoint, extraParams = '') => {
+  const basis = `${API_BASE_URL}${endpoint}?limit=${DEFAULTS.LIMIT}&page=${DEFAULTS.PAGE}`;
+  return extraParams ? `${basis}&${extraParams}` : basis;
+};
