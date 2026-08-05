@@ -1,29 +1,25 @@
 'use strict';
 
-export const API_BASE_URL = 'https://api.jikan.moe/v4';
+export const API_BASE_URL = 'https://kitsu.io/api/edge';
 
 export const ENDPOINTS = {
-  TOP_ANIME: '/top/anime',
-  SEARCH: '/anime',
-  DETAIL: '/anime',
-  GENRES: '/genres/anime',
+  ANIME: '/anime',
+  CATEGORIES: '/categories',
 };
 
 export const DEFAULTS = {
-  LIMIT: 24,
-  PAGE: 1,
+  LIMIT: 20,
+  OFFSET: 0,
+  SORT: '-userCount',
 };
 
-// Jikan normaal da geeft ongv ~3 requests per seconde toe..
-export const RATE_LIMIT_MS = 400;
-
 export const buildUrl = (endpoint, extraParams = '') => {
-  const basis = `${API_BASE_URL}${endpoint}?limit=${DEFAULTS.LIMIT}&page=${DEFAULTS.PAGE}`;
+  const basis = `${API_BASE_URL}${endpoint}?page[limit]=${DEFAULTS.LIMIT}&page[offset]=${DEFAULTS.OFFSET}`;
   return extraParams ? `${basis}&${extraParams}` : basis;
 };
 
 export const getTopAnime = async () => {
-  const url = buildUrl(ENDPOINTS.TOP_ANIME);
+  const url = buildUrl(ENDPOINTS.ANIME, `sort=${DEFAULTS.SORT}`);
 
   try {
     const response = await fetch(url);
@@ -35,13 +31,13 @@ export const getTopAnime = async () => {
     const data = await response.json();
     return data.data;
   } catch (error) {
-    console.error('Kon de top anime niet ophalen:', error);
+    console.error('Kon de anime niet ophalen:', error);
     return [];
   }
 };
 
 export const searchAnime = async (zoekterm) => {
-  const url = buildUrl(ENDPOINTS.SEARCH, `q=${encodeURIComponent(zoekterm)}`);
+  const url = buildUrl(ENDPOINTS.ANIME, `filter[text]=${encodeURIComponent(zoekterm)}`);
 
   try {
     const response = await fetch(url);
