@@ -9,6 +9,12 @@ export const setStatus = (tekst) => {
 };
 
 export const renderAnimeCards = (animeLijst) => {
+  if (animeLijst.length === 0) {
+    animeContainer.innerHTML = '';
+    setStatus('Geen anime gevonden. Probeer een andere zoekterm.');
+    return;
+  }
+
   const kaarten = animeLijst.map((anime) => {
     const info = anime.attributes;
     const poster = info.posterImage ? info.posterImage.medium : '';
