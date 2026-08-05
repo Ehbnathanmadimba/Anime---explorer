@@ -62,3 +62,41 @@ button {
 body.licht #search-form {
   background-color: #e6e6ef;
 }
+
+#anime-container,
+#favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.kaart {
+  flex: 0 1 200px;
+  padding: 10px;
+  border: 1px solid #2a2a3d;
+  background-color: #1c1c2b;
+}
+
+body.licht .kaart {
+  border-color: #dcdce8;
+  background-color: #ffffff;
+}
+
+.kaart img {
+  width: 100%;
+}
+
+.kaart h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.kaart p {
+  font-size: 14px;
+  color: #9a9ab0;
+}
+
+body.licht .kaart p {
+  color: #5c5c72;
+}
