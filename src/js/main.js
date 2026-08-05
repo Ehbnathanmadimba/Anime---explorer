@@ -2,6 +2,7 @@
 
 import '../css/style.css';
 import { getTopAnime } from './api.js';
+import { renderAnimeCards } from './ui.js';
 
 const themeButton = document.querySelector('#theme-button');
 
@@ -12,7 +13,7 @@ themeButton.addEventListener('click', () => {
 
 const start = async () => {
   const animeLijst = await getTopAnime();
-  console.log('Opgehaalde anime:', animeLijst);
+  renderAnimeCards(animeLijst);
 };
 
 start();
