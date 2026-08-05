@@ -4,6 +4,10 @@ export const animeContainer = document.querySelector('#anime-container');
 export const favoritesList = document.querySelector('#favorites-list');
 export const statusMessage = document.querySelector('#status-message');
 
+export const setStatus = (tekst) => {
+  statusMessage.textContent = tekst;
+};
+
 export const renderAnimeCards = (animeLijst) => {
   const kaarten = animeLijst.map((anime) => {
     const info = anime.attributes;

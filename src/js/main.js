@@ -2,7 +2,7 @@
 
 import '../css/style.css';
 import { getTopAnime } from './api.js';
-import { renderAnimeCards } from './ui.js';
+import { renderAnimeCards, setStatus } from './ui.js';
 
 const themeButton = document.querySelector('#theme-button');
 
@@ -12,7 +12,11 @@ themeButton.addEventListener('click', () => {
 });
 
 const start = async () => {
+  setStatus('Bezig met laden...');
+
   const animeLijst = await getTopAnime();
+
+  setStatus('');
   renderAnimeCards(animeLijst);
 };
 

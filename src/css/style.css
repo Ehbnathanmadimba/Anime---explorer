@@ -84,6 +84,16 @@ body.licht #search-form {
   background-color: #e6e6ef;
 }
 
+#status-message {
+  margin-top: 15px;
+  color: #9a9ab0;
+  font-style: italic;
+}
+
+body.licht #status-message {
+  color: #5c5c72;
+}
+
 #anime-container,
 #favorites-list {
   display: flex;
