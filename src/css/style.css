@@ -37,6 +37,27 @@ button {
   padding: 8px;
 }
 
+button {
+  border: 1px solid #2a2a3d;
+  background-color: #2a2a3d;
+  color: #e8e8f0;
+  transition: background-color 200ms ease;
+}
+
+button:hover {
+  background-color: #3d3d5c;
+}
+
+body.licht button {
+  border-color: #c9c9db;
+  background-color: #e0e0ec;
+  color: #1a1a22;
+}
+
+body.licht button:hover {
+  background-color: #cdcde0;
+}
+
 #app {
   max-width: 1100px;
   margin: 0 auto;
@@ -76,6 +97,16 @@ body.licht #search-form {
   padding: 10px;
   border: 1px solid #2a2a3d;
   background-color: #1c1c2b;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.kaart:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.licht .kaart:hover {
+  box-shadow: 0 10px 20px rgba(20, 20, 40, 0.18);
 }
 
 body.licht .kaart {
