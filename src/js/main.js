@@ -1,7 +1,7 @@
 'use strict';
 
 import '../css/style.css';
-import { getTopAnime } from './api.js';
+import { getTopAnime, searchAnime } from './api.js';
 import { renderAnimeCards, renderAnimeTable, setStatus } from './ui.js';
 import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
 
@@ -30,7 +30,7 @@ viewButton.addEventListener('click', () => {
   toonResultaten();
 });
 
-searchForm.addEventListener('submit', (event) => {
+searchForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const fout = valideerZoekterm(searchInput.value);
@@ -40,7 +40,12 @@ searchForm.addEventListener('submit', (event) => {
     return;
   }
 
-  console.log('Zoeken naar:', searchInput.value.trim());
+  setStatus('Bezig met zoeken...');
+
+  huidigeLijst = await searchAnime(searchInput.value.trim());
+
+  setStatus('');
+  toonResultaten();
 });
 
 const start = async () => {
