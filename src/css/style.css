@@ -102,6 +102,43 @@ body.licht #status-message {
   margin-top: 20px;
 }
 
+#anime-tabel {
+  flex: 1 1 100%;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#anime-tabel th,
+#anime-tabel td {
+  padding: 10px;
+  border-bottom: 1px solid #2a2a3d;
+  text-align: left;
+}
+
+#anime-tabel th {
+  background-color: #1c1c2b;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+#anime-tabel tbody tr {
+  transition: background-color 200ms ease;
+}
+
+#anime-tabel tbody tr:hover {
+  background-color: #1c1c2b;
+}
+
+body.licht #anime-tabel th,
+body.licht #anime-tabel td {
+  border-bottom-color: #dcdce8;
+}
+
+body.licht #anime-tabel th,
+body.licht #anime-tabel tbody tr:hover {
+  background-color: #e6e6ef;
+}
+
 .kaart {
   flex: 0 1 200px;
   padding: 10px;
