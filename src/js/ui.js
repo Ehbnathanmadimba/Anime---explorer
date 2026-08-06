@@ -4,6 +4,28 @@ export const animeContainer = document.querySelector('#anime-container');
 export const favoritesList = document.querySelector('#favorites-list');
 export const statusMessage = document.querySelector('#status-message');
 
+const modal = document.querySelector('#modal');
+const modalBody = document.querySelector('#modal-body');
+
+export const openModal = (anime) => {
+  const info = anime.attributes;
+  const poster = info.posterImage ? info.posterImage.medium : '';
+
+  modalBody.innerHTML = `
+    <h3>${info.canonicalTitle}</h3>
+    <img src="${poster}" alt="Poster van ${info.canonicalTitle}" />
+    <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${info.status}</p>
+    <p>Score: ${info.averageRating ? info.averageRating : '?'}</p>
+    <p>${info.synopsis ? info.synopsis : 'Geen beschrijving beschikbaar.'}</p>
+  `;
+
+  modal.classList.remove('verborgen');
+};
+
+export const sluitModal = () => {
+  modal.classList.add('verborgen');
+};
+
 export const setStatus = (tekst) => {
   statusMessage.textContent = tekst;
 };
@@ -22,7 +44,7 @@ export const renderAnimeCards = (animeLijst) => {
     const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
 
     return `
-      <article class="kaart">
+      <article class="kaart" data-id="${anime.id}">
         <img src="${poster}" alt="Poster van ${info.canonicalTitle}" />
         <h3>${info.canonicalTitle}</h3>
         <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>

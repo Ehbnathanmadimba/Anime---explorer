@@ -155,6 +155,24 @@ body.licht #modal-inhoud {
   right: 15px;
 }
 
+#modal-body img {
+  width: 200px;
+  margin: 15px 0;
+}
+
+#modal-body h3 {
+  padding-right: 90px;
+  font-size: 22px;
+}
+
+#modal-body p {
+  margin-bottom: 10px;
+}
+
+.kaart {
+  cursor: pointer;
+}
+
 #anime-tabel {
   flex: 1 1 100%;
   border-collapse: collapse;
