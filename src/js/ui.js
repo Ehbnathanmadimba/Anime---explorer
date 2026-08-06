@@ -33,3 +33,44 @@ export const renderAnimeCards = (animeLijst) => {
 
   animeContainer.innerHTML = kaarten.join('');
 };
+
+export const renderAnimeTable = (animeLijst) => {
+  if (animeLijst.length === 0) {
+    animeContainer.innerHTML = '';
+    setStatus('Geen anime gevonden. Probeer een andere zoekterm.');
+    return;
+  }
+
+  let rijen = '';
+
+  for (const anime of animeLijst) {
+    const info = anime.attributes;
+
+    rijen += `
+      <tr>
+        <td>${info.canonicalTitle}</td>
+        <td>${info.showType}</td>
+        <td>${info.episodeCount ?? '?'}</td>
+        <td>${info.averageRating ? info.averageRating : '?'}</td>
+        <td>${info.startDate ? info.startDate.slice(0, 4) : '?'}</td>
+        <td>${info.status}</td>
+      </tr>
+    `;
+  }
+
+  animeContainer.innerHTML = `
+    <table id="anime-tabel">
+      <thead>
+        <tr>
+          <th>Titel</th>
+          <th>Type</th>
+          <th>Afleveringen</th>
+          <th>Score</th>
+          <th>Jaar</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>${rijen}</tbody>
+    </table>
+  `;
+};
