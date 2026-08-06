@@ -2,11 +2,20 @@
 
 import '../css/style.css';
 import { getTopAnime, searchAnime } from './api.js';
-import { renderAnimeCards, renderAnimeTable, setStatus } from './ui.js';
+import {
+  renderAnimeCards,
+  renderAnimeTable,
+  setStatus,
+  animeContainer,
+  openModal,
+  sluitModal,
+} from './ui.js';
 import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
 
 const themeButton = document.querySelector('#theme-button');
 const viewButton = document.querySelector('#view-button');
+const modal = document.querySelector('#modal');
+const modalSluit = document.querySelector('#modal-sluit');
 
 let huidigeLijst = [];
 let toonTabel = false;
@@ -28,6 +37,27 @@ viewButton.addEventListener('click', () => {
   toonTabel = !toonTabel;
   viewButton.textContent = toonTabel ? 'Toon als kaarten' : 'Toon als tabel';
   toonResultaten();
+});
+
+animeContainer.addEventListener('click', (event) => {
+  const kaart = event.target.closest('.kaart');
+
+  if (!kaart) {
+    return;
+  }
+
+  const id = kaart.getAttribute('data-id');
+  const anime = huidigeLijst.find((item) => item.id === id);
+
+  openModal(anime);
+});
+
+modalSluit.addEventListener('click', sluitModal);
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    sluitModal();
+  }
 });
 
 searchForm.addEventListener('submit', async (event) => {
