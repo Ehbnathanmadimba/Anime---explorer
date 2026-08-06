@@ -3,6 +3,7 @@
 import '../css/style.css';
 import { getTopAnime } from './api.js';
 import { renderAnimeCards, renderAnimeTable, setStatus } from './ui.js';
+import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
 
 const themeButton = document.querySelector('#theme-button');
 const viewButton = document.querySelector('#view-button');
@@ -27,6 +28,19 @@ viewButton.addEventListener('click', () => {
   toonTabel = !toonTabel;
   viewButton.textContent = toonTabel ? 'Toon als kaarten' : 'Toon als tabel';
   toonResultaten();
+});
+
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const fout = valideerZoekterm(searchInput.value);
+  toonFout(fout);
+
+  if (fout) {
+    return;
+  }
+
+  console.log('Zoeken naar:', searchInput.value.trim());
 });
 
 const start = async () => {
