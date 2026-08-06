@@ -84,6 +84,20 @@ body.licht #search-form {
   background-color: #e6e6ef;
 }
 
+#search-error {
+  flex: 1 1 100%;
+  color: #ff6b81;
+  font-size: 14px;
+}
+
+#search-error:empty {
+  display: none;
+}
+
+body.licht #search-error {
+  color: #c0182f;
+}
+
 #status-message {
   margin-top: 15px;
   color: #9a9ab0;

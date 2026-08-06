@@ -5,3 +5,21 @@ export const searchInput = document.querySelector('#search-input');
 export const searchError = document.querySelector('#search-error');
 export const filterType = document.querySelector('#filter-type');
 export const sortSelect = document.querySelector('#sort-select');
+
+export const valideerZoekterm = (zoekterm) => {
+  const schoon = zoekterm.trim();
+
+  if (schoon.length === 0) {
+    return 'Vul een titel in om te zoeken.';
+  }
+
+  if (schoon.length < 3) {
+    return 'Typ minstens 3 tekens.';
+  }
+
+  return '';
+};
+
+export const toonFout = (bericht) => {
+  searchError.textContent = bericht;
+};
