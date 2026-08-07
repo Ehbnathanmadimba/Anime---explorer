@@ -7,9 +7,12 @@ import {
   renderAnimeTable,
   setStatus,
   animeContainer,
+  favoritesList,
+  renderFavorieten,
   openModal,
   sluitModal,
 } from './ui.js';
+import { getFavorieten, wisselFavoriet } from './storage.js';
 import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
 
 const themeButton = document.querySelector('#theme-button');
@@ -39,18 +42,32 @@ viewButton.addEventListener('click', () => {
   toonResultaten();
 });
 
-animeContainer.addEventListener('click', (event) => {
+const vindAnime = (id) => {
+  const inLijst = huidigeLijst.find((item) => item.id === id);
+  return inLijst ? inLijst : getFavorieten().find((item) => item.id === id);
+};
+
+const behandelKaartKlik = (event) => {
+  const favKnop = event.target.closest('.fav-knop');
+
+  if (favKnop) {
+    wisselFavoriet(vindAnime(favKnop.getAttribute('data-fav')));
+    toonResultaten();
+    renderFavorieten();
+    return;
+  }
+
   const kaart = event.target.closest('.kaart');
 
   if (!kaart) {
     return;
   }
 
-  const id = kaart.getAttribute('data-id');
-  const anime = huidigeLijst.find((item) => item.id === id);
+  openModal(vindAnime(kaart.getAttribute('data-id')));
+};
 
-  openModal(anime);
-});
+animeContainer.addEventListener('click', behandelKaartKlik);
+favoritesList.addEventListener('click', behandelKaartKlik);
 
 modalSluit.addEventListener('click', sluitModal);
 
@@ -85,6 +102,7 @@ const start = async () => {
 
   setStatus('');
   toonResultaten();
+  renderFavorieten();
 };
 
 start();

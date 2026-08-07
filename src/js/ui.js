@@ -48,11 +48,13 @@ const maakKaart = (anime) => {
   const poster = info.posterImage ? info.posterImage.medium : '';
   const score = info.averageRating ? info.averageRating : '?';
   const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
-  const hartje = isFavoriet(anime.id) ? '♥' : '♡';
+  const favoriet = isFavoriet(anime.id);
+  const hartje = favoriet ? '♥' : '♡';
+  const favClass = favoriet ? 'fav-knop is-favoriet' : 'fav-knop';
 
   return `
     <article class="kaart" data-id="${anime.id}">
-      <button class="fav-knop" type="button" data-fav="${anime.id}">${hartje}</button>
+      <button class="${favClass}" type="button" data-fav="${anime.id}">${hartje}</button>
       <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
       <h3>${info.canonicalTitle}</h3>
       <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>

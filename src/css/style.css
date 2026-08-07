@@ -228,6 +228,11 @@ body.licht #anime-tabel tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.fav-knop.is-favoriet {
+  color: #ff2d55;
+  background-color: rgba(255, 45, 85, 0.15);
+}
+
 .kaart {
   position: relative;
   flex: 0 1 200px;
