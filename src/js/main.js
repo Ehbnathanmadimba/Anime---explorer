@@ -176,6 +176,25 @@ searchForm.addEventListener('submit', async (event) => {
   verwerkLijst();
 });
 
+let zoekTimer;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(zoekTimer);
+
+  zoekTimer = setTimeout(async () => {
+    const zoekterm = searchInput.value.trim();
+
+    if (zoekterm.length === 1) {
+      return;
+    }
+
+    toonFout('');
+    ruweLijst = zoekterm ? await searchAnime(zoekterm) : await getTopAnime();
+
+    verwerkLijst();
+  }, 200);
+});
+
 const start = async () => {
   setStatus('Bezig met laden...');
 

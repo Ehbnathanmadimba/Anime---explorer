@@ -13,8 +13,8 @@ export const valideerZoekterm = (zoekterm) => {
     return 'Vul een titel in om te zoeken.';
   }
 
-  if (schoon.length < 3) {
-    return 'Typ minstens 3 tekens.';
+  if (schoon.length < 2) {
+    return 'Typ minstens 2 tekens.';
   }
 
   return '';
