@@ -22,3 +22,23 @@ export const schrijfNaarOpslag = (sleutel, waarde) => {
     console.error(`Kon "${sleutel}" niet opslaan:`, error);
   }
 };
+
+export const getFavorieten = () => leesUitOpslag(STORAGE_KEYS.FAVORIETEN, []);
+
+export const isFavoriet = (id) => {
+  return getFavorieten().filter((favoriet) => favoriet.id === id).length > 0;
+};
+
+export const wisselFavoriet = (anime) => {
+  const favorieten = getFavorieten();
+
+  if (isFavoriet(anime.id)) {
+    const zonder = favorieten.filter((favoriet) => favoriet.id !== anime.id);
+    schrijfNaarOpslag(STORAGE_KEYS.FAVORIETEN, zonder);
+    return false;
+  }
+
+  favorieten.push(anime);
+  schrijfNaarOpslag(STORAGE_KEYS.FAVORIETEN, favorieten);
+  return true;
+};
