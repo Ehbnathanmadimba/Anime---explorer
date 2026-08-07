@@ -37,13 +37,35 @@ let ruweLijst = [];
 let huidigeLijst = [];
 let toonTabel = false;
 
+const jaarVan = (anime) => {
+  return anime.attributes.startDate ? Number(anime.attributes.startDate.slice(0, 4)) : 0;
+};
+
+const sorteer = (lijst) => {
+  const gesorteerd = lijst.slice();
+  const keuze = sortSelect.value;
+
+  if (keuze === 'score') {
+    gesorteerd.sort((a, b) => Number(b.attributes.averageRating) - Number(a.attributes.averageRating));
+  } else if (keuze === 'title') {
+    gesorteerd.sort((a, b) => (a.attributes.canonicalTitle > b.attributes.canonicalTitle ? 1 : -1));
+  } else if (keuze === 'year') {
+    gesorteerd.sort((a, b) => jaarVan(b) - jaarVan(a));
+  } else {
+    gesorteerd.sort((a, b) => (a.attributes.popularityRank ?? 9999) - (b.attributes.popularityRank ?? 9999));
+  }
+
+  return gesorteerd;
+};
+
 const verwerkLijst = () => {
   const type = filterType.value;
 
-  huidigeLijst = type
+  const gefilterd = type
     ? ruweLijst.filter((anime) => anime.attributes.subtype === type)
     : ruweLijst;
 
+  huidigeLijst = sorteer(gefilterd);
   toonResultaten();
 };
 
@@ -56,6 +78,7 @@ const toonResultaten = () => {
 };
 
 filterType.addEventListener('change', verwerkLijst);
+sortSelect.addEventListener('change', verwerkLijst);
 
 if (leesUitOpslag(STORAGE_KEYS.THEMA, 'donker') === 'licht') {
   document.body.classList.add('licht');
