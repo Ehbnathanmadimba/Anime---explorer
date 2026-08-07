@@ -8,6 +8,11 @@ body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
   line-height: 1.5;
   background-color: #14141f;
+  background-image:
+    radial-gradient(50rem 25rem at 8% 0%, rgba(124, 58, 237, 0.13), transparent 60%),
+    radial-gradient(45rem 22rem at 95% 10%, rgba(34, 211, 238, 0.09), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #e8e8f0;
 }
 
@@ -20,6 +25,9 @@ h2,
 
 body.licht {
   background-color: #f4f4f8;
+  background-image:
+    radial-gradient(50rem 25rem at 8% 0%, rgba(124, 58, 237, 0.12), transparent 60%),
+    radial-gradient(45rem 22rem at 95% 10%, rgba(8, 145, 178, 0.10), transparent 60%);
   color: #1a1a22;
 }
 
