@@ -42,18 +42,28 @@ const jaarVan = (anime) => {
   return anime.attributes.startDate ? Number(anime.attributes.startDate.slice(0, 4)) : 0;
 };
 
+const scoreVan = (anime) => Number(anime.attributes.averageRating ?? 0);
+const titelVan = (anime) => anime.attributes.canonicalTitle.toLowerCase();
+const rangVan = (anime) => anime.attributes.popularityRank ?? 9999;
+
 const sorteer = (lijst) => {
   const gesorteerd = lijst.slice();
   const keuze = sortSelect.value;
 
-  if (keuze === 'score') {
-    gesorteerd.sort((a, b) => Number(b.attributes.averageRating) - Number(a.attributes.averageRating));
-  } else if (keuze === 'title') {
-    gesorteerd.sort((a, b) => (a.attributes.canonicalTitle > b.attributes.canonicalTitle ? 1 : -1));
-  } else if (keuze === 'year') {
+  if (keuze === 'score-hoog') {
+    gesorteerd.sort((a, b) => scoreVan(b) - scoreVan(a));
+  } else if (keuze === 'score-laag') {
+    gesorteerd.sort((a, b) => scoreVan(a) - scoreVan(b));
+  } else if (keuze === 'titel-az') {
+    gesorteerd.sort((a, b) => (titelVan(a) > titelVan(b) ? 1 : -1));
+  } else if (keuze === 'titel-za') {
+    gesorteerd.sort((a, b) => (titelVan(a) < titelVan(b) ? 1 : -1));
+  } else if (keuze === 'jaar-nieuw') {
     gesorteerd.sort((a, b) => jaarVan(b) - jaarVan(a));
+  } else if (keuze === 'jaar-oud') {
+    gesorteerd.sort((a, b) => jaarVan(a) - jaarVan(b));
   } else {
-    gesorteerd.sort((a, b) => (a.attributes.popularityRank ?? 9999) - (b.attributes.popularityRank ?? 9999));
+    gesorteerd.sort((a, b) => rangVan(a) - rangVan(b));
   }
 
   return gesorteerd;

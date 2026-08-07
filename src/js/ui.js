@@ -39,6 +39,7 @@ export const renderAnimeCards = (animeLijst) => {
     return;
   }
 
+  setStatus('');
   animeContainer.innerHTML = animeLijst.map(maakKaart).join('');
   startLazyLoading();
 };
@@ -117,6 +118,8 @@ export const renderAnimeTable = (animeLijst) => {
     setStatus('Geen anime gevonden. Probeer een andere zoekterm.');
     return;
   }
+
+  setStatus('');
 
   let rijen = '';
 
