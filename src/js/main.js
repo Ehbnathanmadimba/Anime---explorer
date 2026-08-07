@@ -12,7 +12,13 @@ import {
   openModal,
   sluitModal,
 } from './ui.js';
-import { getFavorieten, wisselFavoriet } from './storage.js';
+import {
+  getFavorieten,
+  wisselFavoriet,
+  leesUitOpslag,
+  schrijfNaarOpslag,
+  STORAGE_KEYS,
+} from './storage.js';
 import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
 
 const themeButton = document.querySelector('#theme-button');
@@ -31,9 +37,16 @@ const toonResultaten = () => {
   }
 };
 
+if (leesUitOpslag(STORAGE_KEYS.THEMA, 'donker') === 'licht') {
+  document.body.classList.add('licht');
+  themeButton.textContent = 'Donker thema';
+}
+
 themeButton.addEventListener('click', () => {
   const isLicht = document.body.classList.toggle('licht');
+
   themeButton.textContent = isLicht ? 'Donker thema' : 'Licht thema';
+  schrijfNaarOpslag(STORAGE_KEYS.THEMA, isLicht ? 'licht' : 'donker');
 });
 
 viewButton.addEventListener('click', () => {
