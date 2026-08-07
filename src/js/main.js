@@ -22,7 +22,7 @@ import {
 import {
   searchForm,
   searchInput,
-  filterType,
+  filterKnoppen,
   sortSelect,
   valideerZoekterm,
   toonFout,
@@ -36,6 +36,7 @@ const modalSluit = document.querySelector('#modal-sluit');
 let ruweLijst = [];
 let huidigeLijst = [];
 let toonTabel = false;
+let actiefType = '';
 
 const jaarVan = (anime) => {
   return anime.attributes.startDate ? Number(anime.attributes.startDate.slice(0, 4)) : 0;
@@ -59,10 +60,8 @@ const sorteer = (lijst) => {
 };
 
 const verwerkLijst = () => {
-  const type = filterType.value;
-
-  const gefilterd = type
-    ? ruweLijst.filter((anime) => anime.attributes.subtype === type)
+  const gefilterd = actiefType
+    ? ruweLijst.filter((anime) => anime.attributes.subtype === actiefType)
     : ruweLijst;
 
   huidigeLijst = sorteer(gefilterd);
@@ -77,7 +76,23 @@ const toonResultaten = () => {
   }
 };
 
-filterType.addEventListener('change', verwerkLijst);
+filterKnoppen.addEventListener('click', (event) => {
+  const chip = event.target.closest('.chip');
+
+  if (!chip) {
+    return;
+  }
+
+  actiefType = chip.getAttribute('data-type');
+
+  for (const knop of filterKnoppen.querySelectorAll('.chip')) {
+    knop.classList.remove('actief');
+  }
+
+  chip.classList.add('actief');
+  verwerkLijst();
+});
+
 sortSelect.addEventListener('change', verwerkLijst);
 
 if (leesUitOpslag(STORAGE_KEYS.THEMA, 'donker') === 'licht') {

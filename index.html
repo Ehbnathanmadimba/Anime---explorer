@@ -30,29 +30,31 @@
 
       <form id="search-form">
         <label for="search-input">Zoek</label>
-        <input id="search-input" type="search" placeholder="Titel van een anime" />
+        <input id="search-input" type="search" placeholder="Zoek een anime op titel..." />
         <button type="submit">Zoeken</button>
-
-        <label for="filter-type">Type</label>
-        <select id="filter-type">
-          <option value="">Alle types</option>
-          <option value="TV">TV</option>
-          <option value="movie">Film</option>
-          <option value="OVA">OVA</option>
-          <option value="ONA">ONA</option>
-          <option value="special">Special</option>
-        </select>
-
-        <label for="sort-select">Sorteer op</label>
-        <select id="sort-select">
-          <option value="rank">Rang</option>
-          <option value="score">Score</option>
-          <option value="title">Titel</option>
-          <option value="year">Jaar</option>
-        </select>
-
         <p id="search-error"></p>
       </form>
+
+      <div id="filter-balk">
+        <div id="filter-knoppen">
+          <button type="button" class="chip actief" data-type="">Alle</button>
+          <button type="button" class="chip" data-type="TV">TV</button>
+          <button type="button" class="chip" data-type="movie">Film</button>
+          <button type="button" class="chip" data-type="OVA">OVA</button>
+          <button type="button" class="chip" data-type="ONA">ONA</button>
+          <button type="button" class="chip" data-type="special">Special</button>
+        </div>
+
+        <div id="sorteer-blok">
+          <label for="sort-select">Sorteer op</label>
+          <select id="sort-select">
+            <option value="rank">Rang</option>
+            <option value="score">Score</option>
+            <option value="title">Titel</option>
+            <option value="year">Jaar</option>
+          </select>
+        </div>
+      </div>
 
       <main>
         <section id="favorites-section">
