@@ -236,6 +236,16 @@ body.licht .kaart {
   width: 100%;
 }
 
+.kaart img.lazy {
+  min-height: 270px;
+  background-color: #2a2a3d;
+  color: transparent;
+}
+
+body.licht .kaart img.lazy {
+  background-color: #e0e0ec;
+}
+
 .kaart h3 {
   margin-top: 10px;
   font-size: 16px;

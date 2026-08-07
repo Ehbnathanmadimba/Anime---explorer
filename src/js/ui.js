@@ -45,7 +45,7 @@ export const renderAnimeCards = (animeLijst) => {
 
     return `
       <article class="kaart" data-id="${anime.id}">
-        <img src="${poster}" alt="Poster van ${info.canonicalTitle}" />
+        <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
         <h3>${info.canonicalTitle}</h3>
         <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>
         <p>Score: ${score}</p>
@@ -54,6 +54,27 @@ export const renderAnimeCards = (animeLijst) => {
   });
 
   animeContainer.innerHTML = kaarten.join('');
+  startLazyLoading();
+};
+
+const startLazyLoading = () => {
+  const afbeeldingen = document.querySelectorAll('img.lazy');
+
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        const afbeelding = entry.target;
+
+        afbeelding.src = afbeelding.getAttribute('data-src');
+        afbeelding.classList.remove('lazy');
+        observer.unobserve(afbeelding);
+      }
+    }
+  });
+
+  for (const afbeelding of afbeeldingen) {
+    observer.observe(afbeelding);
+  }
 };
 
 export const renderAnimeTable = (animeLijst) => {
