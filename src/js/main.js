@@ -32,6 +32,27 @@ const themeButton = document.querySelector('#theme-button');
 const viewButton = document.querySelector('#view-button');
 const modal = document.querySelector('#modal');
 const modalSluit = document.querySelector('#modal-sluit');
+const navAlle = document.querySelector('#nav-alle');
+const navFavorieten = document.querySelector('#nav-favorieten');
+const favTeller = document.querySelector('#fav-teller');
+const favorietenSectie = document.querySelector('#favorites-section');
+const resultatenSectie = document.querySelector('#results-section');
+
+const werkTellerBij = () => {
+  favTeller.textContent = getFavorieten().length;
+};
+
+const toonSectie = (naam) => {
+  const favorietenAan = naam === 'favorieten';
+
+  favorietenSectie.classList.toggle('verborgen', !favorietenAan);
+  resultatenSectie.classList.toggle('verborgen', favorietenAan);
+  navFavorieten.classList.toggle('actief', favorietenAan);
+  navAlle.classList.toggle('actief', !favorietenAan);
+};
+
+navAlle.addEventListener('click', () => toonSectie('alle'));
+navFavorieten.addEventListener('click', () => toonSectie('favorieten'));
 
 let ruweLijst = [];
 let huidigeLijst = [];
@@ -135,6 +156,7 @@ const behandelKaartKlik = (event) => {
     wisselFavoriet(vindAnime(favKnop.getAttribute('data-fav')));
     toonResultaten();
     renderFavorieten();
+    werkTellerBij();
     return;
   }
 
@@ -203,6 +225,8 @@ const start = async () => {
   setStatus('');
   verwerkLijst();
   renderFavorieten();
+  werkTellerBij();
+  toonSectie('alle');
 };
 
 start();
