@@ -7,18 +7,37 @@ export const favoritesList = document.querySelector('#favorites-list');
 export const statusMessage = document.querySelector('#status-message');
 
 const modal = document.querySelector('#modal');
-const modalBody = document.querySelector('#modal-body');
+export const modalBody = document.querySelector('#modal-body');
 
 export const openModal = (anime) => {
   const info = anime.attributes;
   const poster = info.posterImage ? info.posterImage.medium : '';
+  const score = info.averageRating ? Number(info.averageRating).toFixed(1) : '?';
+  const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
+  const favoriet = isFavoriet(anime.id);
 
   modalBody.innerHTML = `
-    <h3>${info.canonicalTitle}</h3>
-    <img src="${poster}" alt="Poster van ${info.canonicalTitle}" />
-    <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${info.status}</p>
-    <p>Score: ${info.averageRating ? info.averageRating : '?'}</p>
-    <p>${info.synopsis ? info.synopsis : 'Geen beschrijving beschikbaar.'}</p>
+    <div class="modal-kop">
+      <img src="${poster}" alt="Poster van ${info.canonicalTitle}" />
+
+      <div class="modal-info">
+        <span class="badge">${info.showType}</span>
+        <h3>${info.canonicalTitle}</h3>
+
+        <div class="kaart-raster">
+          <p><span class="label">Jaar</span>${jaar}</p>
+          <p><span class="label">Afleveringen</span>${info.episodeCount ?? '?'}</p>
+          <p><span class="label">Status</span>${info.status}</p>
+          <p><span class="label">Score</span>${score}</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="synopsis">${info.synopsis ? info.synopsis : 'Geen beschrijving beschikbaar.'}</p>
+
+    <button class="modal-fav" type="button" data-fav="${anime.id}">
+      ${favoriet ? '♥ Verwijder uit favorieten' : '♡ Voeg toe aan favorieten'}
+    </button>
   `;
 
   modal.classList.remove('verborgen');

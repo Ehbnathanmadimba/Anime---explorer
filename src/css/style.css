@@ -337,18 +337,65 @@ body.licht #modal-inhoud {
   right: 15px;
 }
 
-#modal-body img {
-  width: 200px;
-  margin: 15px 0;
-}
-
-#modal-body h3 {
+.modal-kop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   padding-right: 90px;
-  font-size: 22px;
 }
 
-#modal-body p {
-  margin-bottom: 10px;
+.modal-kop img {
+  flex: 0 0 180px;
+  width: 180px;
+  border-radius: 10px;
+}
+
+.modal-info {
+  flex: 1 1 250px;
+}
+
+.modal-info h3 {
+  margin-top: 8px;
+  font-size: 30px;
+  color: #f3e8ff;
+}
+
+.modal-info .badge {
+  position: static;
+  display: inline-block;
+}
+
+.synopsis {
+  margin-top: 20px;
+  color: #c9c9de;
+  font-size: 15px;
+}
+
+.modal-fav {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  background-image: linear-gradient(135deg, #7c3aed, #22d3ee);
+  color: #14141f;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.modal-fav:hover {
+  background-image: linear-gradient(135deg, #8b4ef5, #38dcf5);
+}
+
+body.licht .modal-info h3 {
+  color: #2a0f4d;
+}
+
+body.licht .synopsis {
+  color: #4a4a63;
+}
+
+body.licht .modal-fav {
+  color: #ffffff;
 }
 
 .kaart {

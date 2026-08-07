@@ -11,6 +11,7 @@ import {
   renderFavorieten,
   openModal,
   sluitModal,
+  modalBody,
 } from './ui.js';
 import {
   getFavorieten,
@@ -172,7 +173,29 @@ const behandelKaartKlik = (event) => {
 animeContainer.addEventListener('click', behandelKaartKlik);
 favoritesList.addEventListener('click', behandelKaartKlik);
 
+modalBody.addEventListener('click', (event) => {
+  const knop = event.target.closest('.modal-fav');
+
+  if (!knop) {
+    return;
+  }
+
+  const anime = vindAnime(knop.getAttribute('data-fav'));
+
+  wisselFavoriet(anime);
+  openModal(anime);
+  toonResultaten();
+  renderFavorieten();
+  werkTellerBij();
+});
+
 modalSluit.addEventListener('click', sluitModal);
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    sluitModal();
+  }
+});
 
 modal.addEventListener('click', (event) => {
   if (event.target === modal) {
