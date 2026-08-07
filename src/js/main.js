@@ -6,6 +6,7 @@ import {
   renderAnimeCards,
   renderAnimeTable,
   setStatus,
+  setTeller,
   animeContainer,
   favoritesList,
   renderFavorieten,
@@ -97,6 +98,8 @@ const verwerkLijst = () => {
     : ruweLijst;
 
   huidigeLijst = sorteer(gefilterd);
+
+  setTeller(huidigeLijst.length);
   toonResultaten();
 };
 

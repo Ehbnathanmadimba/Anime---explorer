@@ -47,8 +47,14 @@ export const sluitModal = () => {
   modal.classList.add('verborgen');
 };
 
+const resultatenTeller = document.querySelector('#resultaten-teller');
+
 export const setStatus = (tekst) => {
   statusMessage.textContent = tekst;
+};
+
+export const setTeller = (aantal) => {
+  resultatenTeller.textContent = aantal === 1 ? '1 resultaat' : `${aantal} resultaten`;
 };
 
 export const renderAnimeCards = (animeLijst) => {

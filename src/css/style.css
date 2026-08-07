@@ -228,6 +228,24 @@ body.licht #search-error {
   color: #c0182f;
 }
 
+#resultaten-balk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#resultaten-teller {
+  color: #9a9ab0;
+  font-size: 14px;
+}
+
+body.licht #resultaten-teller {
+  color: #5c5c72;
+}
+
 #status-message {
   margin-top: 15px;
   color: #9a9ab0;
