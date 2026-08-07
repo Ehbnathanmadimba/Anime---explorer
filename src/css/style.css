@@ -210,7 +210,26 @@ body.licht #anime-tabel tbody tr:hover {
   background-color: #e6e6ef;
 }
 
+.fav-knop {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 2px 8px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ff6b81;
+  font-size: 20px;
+  line-height: 1.2;
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.fav-knop:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 .kaart {
+  position: relative;
   flex: 0 1 200px;
   padding: 10px;
   border: 1px solid #2a2a3d;

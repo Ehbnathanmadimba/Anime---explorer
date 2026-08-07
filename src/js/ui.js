@@ -1,5 +1,7 @@
 'use strict';
 
+import { getFavorieten, isFavoriet } from './storage.js';
+
 export const animeContainer = document.querySelector('#anime-container');
 export const favoritesList = document.querySelector('#favorites-list');
 export const statusMessage = document.querySelector('#status-message');
@@ -37,23 +39,37 @@ export const renderAnimeCards = (animeLijst) => {
     return;
   }
 
-  const kaarten = animeLijst.map((anime) => {
-    const info = anime.attributes;
-    const poster = info.posterImage ? info.posterImage.medium : '';
-    const score = info.averageRating ? info.averageRating : '?';
-    const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
+  animeContainer.innerHTML = animeLijst.map(maakKaart).join('');
+  startLazyLoading();
+};
 
-    return `
-      <article class="kaart" data-id="${anime.id}">
-        <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
-        <h3>${info.canonicalTitle}</h3>
-        <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>
-        <p>Score: ${score}</p>
-      </article>
-    `;
-  });
+const maakKaart = (anime) => {
+  const info = anime.attributes;
+  const poster = info.posterImage ? info.posterImage.medium : '';
+  const score = info.averageRating ? info.averageRating : '?';
+  const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
+  const hartje = isFavoriet(anime.id) ? '♥' : '♡';
 
-  animeContainer.innerHTML = kaarten.join('');
+  return `
+    <article class="kaart" data-id="${anime.id}">
+      <button class="fav-knop" type="button" data-fav="${anime.id}">${hartje}</button>
+      <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
+      <h3>${info.canonicalTitle}</h3>
+      <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>
+      <p>Score: ${score}</p>
+    </article>
+  `;
+};
+
+export const renderFavorieten = () => {
+  const favorieten = getFavorieten();
+
+  if (favorieten.length === 0) {
+    favoritesList.innerHTML = '<p>Je hebt nog geen favorieten. Klik op een hartje.</p>';
+    return;
+  }
+
+  favoritesList.innerHTML = favorieten.map(maakKaart).join('');
   startLazyLoading();
 };
 
