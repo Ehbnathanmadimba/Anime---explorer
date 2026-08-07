@@ -19,15 +19,33 @@ import {
   schrijfNaarOpslag,
   STORAGE_KEYS,
 } from './storage.js';
-import { searchForm, searchInput, valideerZoekterm, toonFout } from './form.js';
+import {
+  searchForm,
+  searchInput,
+  filterType,
+  sortSelect,
+  valideerZoekterm,
+  toonFout,
+} from './form.js';
 
 const themeButton = document.querySelector('#theme-button');
 const viewButton = document.querySelector('#view-button');
 const modal = document.querySelector('#modal');
 const modalSluit = document.querySelector('#modal-sluit');
 
+let ruweLijst = [];
 let huidigeLijst = [];
 let toonTabel = false;
+
+const verwerkLijst = () => {
+  const type = filterType.value;
+
+  huidigeLijst = type
+    ? ruweLijst.filter((anime) => anime.attributes.subtype === type)
+    : ruweLijst;
+
+  toonResultaten();
+};
 
 const toonResultaten = () => {
   if (toonTabel) {
@@ -36,6 +54,8 @@ const toonResultaten = () => {
     renderAnimeCards(huidigeLijst);
   }
 };
+
+filterType.addEventListener('change', verwerkLijst);
 
 if (leesUitOpslag(STORAGE_KEYS.THEMA, 'donker') === 'licht') {
   document.body.classList.add('licht');
@@ -102,19 +122,19 @@ searchForm.addEventListener('submit', async (event) => {
 
   setStatus('Bezig met zoeken...');
 
-  huidigeLijst = await searchAnime(searchInput.value.trim());
+  ruweLijst = await searchAnime(searchInput.value.trim());
 
   setStatus('');
-  toonResultaten();
+  verwerkLijst();
 });
 
 const start = async () => {
   setStatus('Bezig met laden...');
 
-  huidigeLijst = await getTopAnime();
+  ruweLijst = await getTopAnime();
 
   setStatus('');
-  toonResultaten();
+  verwerkLijst();
   renderFavorieten();
 };
 
