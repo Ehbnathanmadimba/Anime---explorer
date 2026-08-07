@@ -46,7 +46,8 @@ export const renderAnimeCards = (animeLijst) => {
 const maakKaart = (anime) => {
   const info = anime.attributes;
   const poster = info.posterImage ? info.posterImage.medium : '';
-  const score = info.averageRating ? info.averageRating : '?';
+  const score = info.averageRating ? Number(info.averageRating).toFixed(1) : '?';
+  const scoreBreedte = info.averageRating ? Number(info.averageRating) : 0;
   const jaar = info.startDate ? info.startDate.slice(0, 4) : '?';
   const favoriet = isFavoriet(anime.id);
   const hartje = favoriet ? '♥' : '♡';
@@ -54,11 +55,26 @@ const maakKaart = (anime) => {
 
   return `
     <article class="kaart" data-id="${anime.id}">
-      <button class="${favClass}" type="button" data-fav="${anime.id}">${hartje}</button>
-      <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
-      <h3>${info.canonicalTitle}</h3>
-      <p>${info.showType} · ${info.episodeCount ?? '?'} afleveringen · ${jaar}</p>
-      <p>Score: ${score}</p>
+      <div class="kaart-media">
+        <span class="badge">${info.showType}</span>
+        <button class="${favClass}" type="button" data-fav="${anime.id}">${hartje}</button>
+        <img class="lazy" data-src="${poster}" alt="Poster van ${info.canonicalTitle}" />
+      </div>
+
+      <div class="kaart-info">
+        <h3>${info.canonicalTitle}</h3>
+
+        <div class="kaart-raster">
+          <p><span class="label">Jaar</span>${jaar}</p>
+          <p><span class="label">Afleveringen</span>${info.episodeCount ?? '?'}</p>
+          <p><span class="label">Status</span>${info.status}</p>
+          <p><span class="label">Score</span>${score}</p>
+        </div>
+
+        <div class="score-balk">
+          <div class="score-vulling" style="width: ${scoreBreedte}%"></div>
+        </div>
+      </div>
     </article>
   `;
 };

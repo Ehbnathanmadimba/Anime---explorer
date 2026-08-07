@@ -300,13 +300,77 @@ body.licht #anime-tabel tbody tr:hover {
 }
 
 .kaart {
-  position: relative;
-  flex: 0 1 200px;
-  padding: 10px;
+  flex: 0 1 220px;
+  overflow: hidden;
   border: 1px solid #2a2a3d;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: #1c1c2b;
   transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.kaart-media {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background-color: rgba(124, 58, 237, 0.9);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kaart-info {
+  padding: 14px;
+}
+
+.kaart-raster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 10px;
+}
+
+.kaart-raster p {
+  flex: 1 1 40%;
+  font-size: 14px;
+}
+
+.label {
+  display: block;
+  color: #b98cff;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.score-balk {
+  height: 6px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #2a2a3d;
+}
+
+.score-vulling {
+  height: 100%;
+  border-radius: 20px;
+  background-image: linear-gradient(90deg, #7c3aed, #22d3ee);
+}
+
+body.licht .label {
+  color: #6b21d9;
+}
+
+body.licht .score-balk {
+  background-color: #dcdce8;
 }
 
 .kaart:hover {
@@ -325,7 +389,6 @@ body.licht .kaart {
 
 .kaart img {
   width: 100%;
-  border-radius: 6px;
 }
 
 .kaart img.lazy {
@@ -339,14 +402,13 @@ body.licht .kaart img.lazy {
 }
 
 .kaart h3 {
-  margin-top: 12px;
-  font-size: 16px;
+  font-size: 19px;
+  line-height: 1.15;
+  color: #f3e8ff;
 }
 
-.kaart p {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #9a9ab0;
+body.licht .kaart h3 {
+  color: #2a0f4d;
 }
 
 h2 {
