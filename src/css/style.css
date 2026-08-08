@@ -486,7 +486,7 @@ body.licht #anime-tabel tbody tr:hover {
   border: 1px solid #2a2a3d;
   border-radius: 12px;
   background-color: #1c1c2b;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
 
 .kaart-media {
@@ -556,11 +556,13 @@ body.licht .score-balk {
 
 .kaart:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-color: #a855f7;
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.35);
 }
 
 body.licht .kaart:hover {
-  box-shadow: 0 10px 20px rgba(20, 20, 40, 0.18);
+  border-color: #7c3aed;
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.25);
 }
 
 body.licht .kaart {
