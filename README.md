@@ -176,6 +176,7 @@ anime-explorer/
 ├── README.md
 ├── docs/
 │   ├── AI-LOG.md           # Log van het AI-gebruik tijdens de ontwikkeling
+│   ├── chatlog-ai.md       # Letterlijke chatlog met alle vragen en antwoorden
 │   └── screenshots/        # Screenshots voor deze README
 ├── public/
 │   └── favicon.svg
@@ -547,6 +548,8 @@ De Kitsu API vereist geen API-sleutel en is gratis toegankelijk.
 ### AI-chatlog
 
 Het volledige verloop van het AI-gebruik staat beschreven in [`docs/AI-LOG.md`](docs/AI-LOG.md).
+
+De letterlijke chatlog met alle vragen en antwoorden staat in [`docs/chatlog-ai.md`](docs/chatlog-ai.md).
 
 ---
 
